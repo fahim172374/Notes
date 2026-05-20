@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communication Rules | Professional Handbook</title>
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #475569;
+            --text-tertiary: #64748b;
+            --border: #e2e8f0;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --accent-dark: #1d4ed8;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --radius: 14px;
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+            --transition: 0.25s ease;
+            --email-bg: #f1f5f9;
+            --email-header: #e2e8f0;
+            --email-body: #ffffff;
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            --border: #334155;
+            --accent-light: #1e3a5f;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
+            --email-bg: #1e293b;
+            --email-header: #334155;
+            --email-body: #1e293b;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+            padding: 2rem 1rem;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ── Navigation ───────────────── */
+        .nav-bar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 50;
+            padding-top: 0.5rem;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.4rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-email-builder {
+            background: var(--accent) !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 8px !important;
+            font-size: 0.85rem !important;
+            display: flex !important;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all var(--transition) !important;
+            text-decoration: none;
+            white-space: nowrap;
+            letter-spacing: -0.01em;
+        }
+        .nav-email-builder:hover {
+            background: var(--accent-dark) !important;
+            color: #ffffff !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        }
+        .theme-toggle {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        .hero .badge {
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.6rem;
+            color: var(--text);
+        }
+        .hero h1 span {
+            color: var(--accent);
+        }
+        .hero .subtitle {
+            color: var(--text-secondary);
+            max-width: 580px;
+            margin: 0.5rem auto;
+            font-size: 1.05rem;
+        }
+        .hero .motto {
+            font-style: italic;
+            color: var(--text-tertiary);
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+            display: inline-block;
+            margin-top: 0.6rem;
+        }
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 2.8rem 0 1.2rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .section-number {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+        }
+        .frameworks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        @media (max-width: 850px) {
+            .frameworks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.6rem;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+        .card-header {
+            font-weight: 700;
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.9rem;
+            letter-spacing: -0.01em;
+        }
+        .card-badge {
+            font-size: 0.7rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+        .flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            align-items: center;
+            margin: 0.8rem 0;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .flow .step {
+            background: #f1f5f9;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            color: var(--text);
+        }
+        [data-theme="dark"] .flow .step {
+            background: #273449;
+        }
+        .flow .arrow {
+            color: var(--text-tertiary);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .left-border {
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            background: #f8fafc;
+            padding: 0.9rem 1rem;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        [data-theme="dark"] .left-border {
+            background: #1e293b;
+        }
+        .left-border.prep {
+            border-left-color: #8b5cf6;
+        }
+        .left-border.c3 {
+            border-left-color: #06b6d4;
+        }
+        .left-border.tca {
+            border-left-color: #f43f5e;
+        }
+        .note {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            color: #166534;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        [data-theme="dark"] .note {
+            background: #0d2818;
+            color: #86efac;
+        }
+        .note-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .highlight-box {
+            background: #fffdf5;
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            font-weight: 700;
+            color: #92400e;
+            position: relative;
+        }
+        [data-theme="dark"] .highlight-box {
+            background: #2d2410;
+            color: #fcd34d;
+            border-color: #b45309;
+        }
+        .highlight-box .tag {
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: #f59e0b;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+        }
+        .bluf-split {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 1rem 0;
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+        .bluf-split .bl {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            color: #92400e;
+            text-align: center;
+            min-width: 100px;
+        }
+        .bluf-split .uf {
+            background: #fff7ed;
+            border: 1px solid #f59e0b;
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            color: #92400e;
+            text-align: center;
+            min-width: 100px;
+        }
+        .bluf-split .small {
+            font-size: 0.7rem;
+            display: block;
+            font-weight: 400;
+        }
+        .email-container {
+            background: var(--email-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+        .email-container:hover {
+            box-shadow: var(--shadow-lg);
+        }
+        .email-meta {
+            background: var(--email-header);
+            padding: 0.9rem 1.2rem;
+            font-size: 0.82rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.3rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .email-meta .label {
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            font-size: 0.68rem;
+        }
+        .email-meta .value {
+            color: var(--text);
+            font-weight: 500;
+        }
+        .email-body {
+            background: var(--email-body);
+            padding: 1.2rem 1.4rem;
+            font-family: var(--font);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            color: var(--text);
+            white-space: pre-wrap;
+            position: relative;
+        }
+        .email-body .email-greeting {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .email-body .email-point {
+            margin: 0.5rem 0;
+            padding-left: 0.2rem;
+        }
+        .email-body .email-point strong {
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .email-signature {
+            margin-top: 1rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        .email-signature .name {
+            font-weight: 700;
+            color: var(--text);
+        }
+        .email-signature .position {
+            font-size: 0.75rem;
+        }
+        .email-actions {
+            position: absolute;
+            top: 0.8rem;
+            right: 0.8rem;
+            display: flex;
+            gap: 0.4rem;
+        }
+        .copy-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all var(--transition);
+            color: var(--text-secondary);
+            font-family: var(--font);
+            letter-spacing: 0.02em;
+            z-index: 2;
+        }
+        .copy-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .copy-btn.copied {
+            background: #10b981;
+            color: #fff;
+            border-color: #10b981;
+        }
+        .chat-bubble {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 0.8rem 0;
+            font-family: var(--font);
+            font-size: 0.85rem;
+            color: #0c4a6e;
+            position: relative;
+            line-height: 1.5;
+        }
+        [data-theme="dark"] .chat-bubble {
+            background: #0c1929;
+            border-color: #1e3a5f;
+            color: #bae6fd;
+        }
+        .chat-bubble .chat-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #0284c7;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+        [data-theme="dark"] .chat-bubble .chat-label {
+            color: #38bdf8;
+        }
+        .principle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0 3rem;
+        }
+        .principle-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition);
+        }
+        .principle-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+        .principle-card .p-icon {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+        }
+        .principle-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+            color: var(--text);
+        }
+        .principle-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+            line-height: 1.5;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+        .footer strong {
+            color: var(--text-secondary);
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- NAVIGATION BAR                            -->
+    <!-- ══════════════════════════════════════════ -->
+    <nav class="nav-bar" id="navbar">
+        <ul class="nav-links" id="navLinks">
+            <li>
+                <a href="https://fahim172374.github.io/html-mail/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="nav-email-builder" 
+                   title="Open HTML Email Builder">
+                    📧 HTML Email Builder
+                </a>
+            </li>
+            <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">🌙</button></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <div class="badge">📘 Internal Handbook</div>
+            <h1>Communication <span>Rules</span></h1>
+            <p class="subtitle">Professional communication builds alignment, accelerates decisions, and fosters a culture of clarity and respect.</p>
+            <p class="motto">Clear communication builds trust, speed, and leadership.</p>
+        </div>
+
+        <h2 class="section-title">
+            <span class="section-number">Rule 01</span> Organized
+        </h2>
+        <p style="color:var(--text-secondary);margin-bottom:1.5rem;">Organized হওয়ার জন্য চিন্তা ভাবনা স্পষ্টভাবে সাজানো প্রয়োজন।</p>
+        <div class="frameworks-grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-badge">A</span> SBAR Framework
+                </div>
+                <div class="card-desc">জরুরী প্রয়োজনে ব্যবহার করা হয়।</div>
+                <div class="flow">
+                    <span class="step">S</span><span class="arrow">→</span>
+                    <span class="step">B</span><span class="arrow">→</span>
+                    <span class="step">A</span><span class="arrow">→</span>
+                    <span class="step">R</span>
+                </div>
+                <div class="left-border">
+                    <strong>S – Situation (পরিস্থিতি):</strong> সমস্যাটি কী তা লিখুন।<br>
+                    <strong>B – Background (পটভূমি/বিস্তারিত):</strong> সমস্যাটি কোথায় এবং কখন ঘটেছে তা লিখুন।<br>
+                    <strong>A – Assessment (মূল্যায়ন):</strong> আপনার পর্যবেক্ষণের ভিত্তিতে সমস্যাটি কেন হয়েছে তা বিশ্লেষণ করুন।<br>
+                    <strong>R – Recommendation (সুপারিশ):</strong> সমস্যার সমাধানের জন্য একটি প্রস্তাব দিন।
+                </div>
+                <div class="email-container">
+                    <div class="email-meta">
+                        <span class="label">Subject</span><span class="value">Server performance issue impacting user login</span>
+                    </div>
+                    <div class="email-body">
+                        <div class="email-actions"><button class="copy-btn">📋 Copy</button></div>
+                        <div class="email-greeting">Dear concern,</div>
+                        <div class="email-point"><strong>Situation:</strong> There is a significant lag in user login times for our corporate clients.</div>
+                        <div class="email-point"><strong>Background:</strong> Login attempts have been timing out for users on the Singapore region for the last 30 minutes. The issue started after the new authentication module was deployed this morning.</div>
+                        <div class="email-point"><strong>Assessment:</strong> The new module is likely causing a bottleneck. The high volume of concurrent login requests is overwhelming the current server capacity.</div>
+                        <div class="email-point"><strong>Recommendation:</strong> We need to roll back the new module immediately and investigate the issue in a staging environment.</div>
+                    </div>
+                </div>
+                <div class="chat-bubble">
+                    <span class="chat-label">💬 SBAR Instant Message</span>
+                    <strong>S:</strong> Issue with new hire orientation registration.<br>
+                    <strong>B:</strong> Four new hires can't access online form — getting 404 error.<br>
+                    <strong>A:</strong> Critical issue that could delay onboarding. Appears to be a broken link in automated email.<br>
+                    <strong>R:</strong> Need to manually send correct link to these four and alert IT team to the broken link.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-badge" style="background:#fef3c7;color:#b45309;">B</span> BLUF Framework
+                </div>
+                <div class="card-desc">কথা না ঘুরিয়ে সরাসরি মূল কথাটি আগে বলার পদ্ধতি। সিনিয়র কাউকে যেমন প্রজেক্ট ম্যানেজারকে বলার সময়।</div>
+                <div class="bluf-split">
+                    <div class="bl">
+                        <strong>BL</strong>
+                        <span class="small">Bottom Line<br>(মূল বার্তা)</span>
+                    </div>
+                    <span style="font-size:1.5rem; color:#f59e0b;">→</span>
+                    <div class="uf">
+                        <strong>UF</strong>
+                        <span class="small">Up Front<br>(শুরুতেই থাকবে)</span>
+                    </div>
+                </div>
+                <div style="background:#fefce8; border-left:4px solid #f59e0b; padding:0.7rem 1rem; border-radius:0 8px 8px 0; margin:0.5rem 0; font-size:0.85rem;">
+                    <strong>Bottom Line:</strong> আপনার মূল বার্তা বা সিদ্ধান্ত।<br>
+                    <strong>Up Front:</strong> এটি থাকবে বার্তার একদম শুরুতে।
+                </div>
+                <div class="email-container">
+                    <div class="email-meta">
+                        <span class="label">Subject</span><span class="value">Q3 Budget Re-allocation Request</span>
+                    </div>
+                    <div class="email-body">
+                        <div class="email-actions"><button class="copy-btn">📋 Copy</button></div>
+                        <div class="email-greeting">Dear concern,</div>
+                        <div class="email-point"><strong>Bottom Line (BL):</strong> We need to re-allocate $20,000 from the "Office Supplies" budget to the "Marketing Initiatives" budget to fund a new ad campaign.</div>
+                        <div class="email-point"><strong>Up Front (UF) Details:</strong> The campaign is a last-minute opportunity to capture a new market segment. We have a surplus in the supplies budget due to a new vendor contract. This re-allocation won't impact our office operations and will provide a significant boost to Q3 sales projections.</div>
+                    </div>
+                </div>
+                <div class="chat-bubble">
+                    <span class="chat-label">💬 BLUF Instant Message</span>
+                    <strong>Bottom Line:</strong> We need to pause the social media ad campaign for the "Project Management" course.<br><br>
+                    <strong>Up Front Details:</strong> The campaign is currently underperforming with a cost-per-lead that's 30% higher than our target. We should re-allocate the remaining budget to the "Leadership Skills" campaign, which is performing well above expectations.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-badge" style="background:#d1fae5;color:#065f46;">C</span> CIC Framework
+                </div>
+                <div class="card-desc">নতুন কোনো আইডিয়া, প্রস্তাবনা দেওয়ার সময় ধাপে ধাপে পরিস্থিতি বুঝিয়ে সমাধানের দিকে নিয়ে যাওয়ার পদ্ধতি।</div>
+                <div class="flow">
+                    <span class="step">Context</span><span class="arrow">→</span>
+                    <span class="step">Impact</span><span class="arrow">→</span>
+                    <span class="step">Conclusion</span>
+                </div>
+                <div class="left-border">
+                    <strong>Context (C):</strong> বর্তমান পরিস্থিতি বা প্রেক্ষাপট কী?<br>
+                    <strong>Impact (I):</strong> এই পরিস্থিতির কারণে কী ক্ষতি হচ্ছে বা কী প্রভাব পড়ছে?<br>
+                    <strong>Conclusion (C):</strong> পরিস্থিতি উত্তরণে আপনার প্রস্তাবনা বা পরবর্তী পদক্ষেপ কী হওয়া উচিত।
+                </div>
+                <div class="note">
+                    <span class="note-icon">💡</span>
+                    <span><strong>মনে রাখবেন:</strong> সরাসরি সমাধান না বলে আগে তার গুরুত্ব (Impact) বুঝিয়ে বললে আপনার প্রস্তাবটি গৃহীত হওয়ার সম্ভাবনা অনেক বেড়ে যায়।</span>
+                </div>
+                <div class="email-container">
+                    <div class="email-meta">
+                        <span class="label">Subject</span><span class="value">Proposal for New Enterprise Dashboard Feature</span>
+                    </div>
+                    <div class="email-body">
+                        <div class="email-actions"><button class="copy-btn">📋 Copy</button></div>
+                        <div class="email-greeting">Dear concern,</div>
+                        <div class="email-point"><strong>Context:</strong> Our enterprise clients have requested a more robust way to track their employees' training progress.</div>
+                        <div class="email-point"><strong>Impact:</strong> The lack of a comprehensive dashboard is a key reason we've lost two major B2B contracts in the last quarter. This feature is crucial for B2B sales and renewals.</div>
+                        <div class="email-point"><strong>Conclusion:</strong> I propose we prioritize the development of a new enterprise-level reporting dashboard in Q4. This will directly address client feedback and improve our competitive standing.</div>
+                    </div>
+                </div>
+                <div class="chat-bubble">
+                    <span class="chat-label">💬 CIC Instant Message</span>
+                    <strong>Context:</strong> Our enterprise clients are starting to ask for a dedicated account manager.<br>
+                    <strong>Impact:</strong> Lack of a single point of contact is causing confusion and slower renewals. Three clients mentioned this as a pain point recently.<br>
+                    <strong>Conclusion:</strong> We should explore creating a "Client Success Manager" role for top-tier clients.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-badge" style="background:#ede9fe;color:#7c3aed;">D</span> PREP Framework
+                </div>
+                <div class="flow">
+                    <span class="step">Point</span><span class="arrow">→</span>
+                    <span class="step">Reason</span><span class="arrow">→</span>
+                    <span class="step">Example</span><span class="arrow">→</span>
+                    <span class="step">Point</span>
+                </div>
+                <div class="left-border prep">
+                    <strong>P – Point (মূল বক্তব্য):</strong> আপনার মূল বিষয়টি সরাসরি বলুন।<br>
+                    <strong>R – Reason (কারণ):</strong> বক্তব্যের পেছনের কারণ ব্যাখ্যা করুন।<br>
+                    <strong>E – Example (উদাহরণ):</strong> যুক্তি প্রমাণে নির্দিষ্ট উদাহরণ বা তথ্য দিন।<br>
+                    <strong>P – Point (মূল বক্তব্য):</strong> শেষে আবার মূল বক্তব্য মনে করিয়ে দিন বা জোর দিন।
+                </div>
+                <div class="email-container">
+                    <div class="email-meta">
+                        <span class="label">Subject</span><span class="value">New Training for Support Team</span>
+                    </div>
+                    <div class="email-body">
+                        <div class="email-actions"><button class="copy-btn">📋 Copy</button></div>
+                        <div class="email-greeting">Dear concern,</div>
+                        <div class="email-point"><strong>Point:</strong> We should implement mandatory training on our new support ticketing system.</div>
+                        <div class="email-point"><strong>Reason:</strong> Team is currently spending too much time navigating the old system which has been replaced.</div>
+                        <div class="email-point"><strong>Example:</strong> Last week our average ticket resolution time increased by 15%, primarily due to team members having to manually update client records across multiple platforms.</div>
+                        <div class="email-point"><strong>Point (Restated):</strong> Training will streamline our processes and significantly improve our team's efficiency and customer satisfaction scores.</div>
+                    </div>
+                </div>
+                <div class="chat-bubble">
+                    <span class="chat-label">💬 PREP Message</span>
+                    <strong>Point:</strong> We should create a new FAQ section for our mobile app.<br>
+                    <strong>Reason:</strong> Roughly 20% of tickets are basic app functionality questions that could be self-serviced.<br>
+                    <strong>Example:</strong> We received 50 tickets this week from users asking how to download course materials for offline viewing — a feature already available.<br>
+                    <strong>Point:</strong> An FAQ section will significantly reduce ticket volume and free up our agents for complex issues.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-badge" style="background:#cffafe;color:#0891b2;">E</span> 3C Model
+                </div>
+                <div class="flow">
+                    <span class="step">Clear</span><span class="arrow">→</span>
+                    <span class="step">Concise</span><span class="arrow">→</span>
+                    <span class="step">Complete</span>
+                </div>
+                <div class="left-border c3">
+                    <strong>Clear (স্পষ্টতা):</strong> আপনার বার্তাটি যেন সহজেই বোঝা যায় এবং কোনো অস্পষ্টতা না থাকে।<br>
+                    <strong>Concise (সংক্ষেপে):</strong> অতিরিক্ত কথা না বাড়িয়ে মূল বিষয়টি সংক্ষেপে তুলে ধরুন।<br>
+                    <strong>Complete (সম্পূর্ণ):</strong> প্রয়োজনীয় সব তথ্য (যেমন: কী করতে হবে, ডেডলাইন ইত্যাদি) যুক্ত করুন।
+                </div>
+                <div class="email-container">
+                    <div class="email-meta">
+                        <span class="label">Subject</span><span class="value">Final Review of New Vendor Contract</span>
+                    </div>
+                    <div class="email-body">
+                        <div class="email-actions"><button class="copy-btn">📋 Copy</button></div>
+                        <div class="email-greeting">Dear concern,</div>
+                        <div class="email-point"><strong>Clear:</strong> Please review and approve the new vendor contract with "Data Secure Incorporated" for our cloud services.</div>
+                        <div class="email-point"><strong>Concise:</strong> We need to finalize this contract by Friday.</div>
+                        <div class="email-point"><strong>Complete:</strong> The contract is in the shared folder titled "New Vendor Agreements." Please look for the file named "Data_Secure_Contract_Final.pdf." This agreement covers data privacy and service level agreements.</div>
+                        <div class="email-signature">
+                            <div class="name">Best regards,</div>
+                            <div class="position">[Your Name] · [Your Position]</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-bubble">
+                    <span class="chat-label">💬 3C Instant Message</span>
+                    <strong>Concise:</strong> Please submit your travel expense reports for last month.<br>
+                    <strong>Clear:</strong> This is for our quarterly financial audit.<br>
+                    <strong>Complete:</strong> Deadline is this Friday. Submit to the expense tracker system and send me a confirmation screenshot once it's done.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-badge" style="background:#ffe4e6;color:#e11d48;">F</span> TCA Framework
+                </div>
+                <div class="flow">
+                    <span class="step">Topic</span><span class="arrow">→</span>
+                    <span class="step">Context</span><span class="arrow">→</span>
+                    <span class="step">Action</span>
+                </div>
+                <div class="left-border tca">
+                    <strong>T – Topic (বিষয়):</strong> আপনি যে বিষয়ে কথা বলতে চান তা নির্দিষ্ট করুন।<br>
+                    <strong>C – Context (পটভূমি):</strong> বিষয়ের পেছনের কারণ বা প্রেক্ষাপট সংক্ষেপে ব্যাখ্যা করুন।<br>
+                    <strong>A – Action (করণীয়/পদক্ষেপ):</strong> শ্রোতা বা প্রাপকের কাছ থেকে আপনি ঠিক কী চান (যেমন: কোনো কাজ, মতামত বা ডেডলাইন) তা স্পষ্টভাবে বলুন।
+                </div>
+                <div class="email-container">
+                    <div class="email-meta">
+                        <span class="label">Subject</span><span class="value">Quarterly Office Supply Order – Action Required</span>
+                    </div>
+                    <div class="email-body">
+                        <div class="email-actions"><button class="copy-btn">📋 Copy</button></div>
+                        <div class="email-greeting">Dear concern,</div>
+                        <div class="email-point"><strong>Topic:</strong> Finalizing the quarterly office supply order.</div>
+                        <div class="email-point"><strong>Context:</strong> We need to place this order by the end of the week to ensure we don't run out of essential supplies like printer paper and toner cartridges.</div>
+                        <div class="email-point"><strong>Action:</strong> Please check your department supply needs and submit your request to me by <strong>5 PM tomorrow</strong>.</div>
+                    </div>
+                </div>
+                <div class="chat-bubble">
+                    <span class="chat-label">💬 TCA Instant Message</span>
+                    <strong>Topic:</strong> Feedback on the new user interface for the training modules.<br>
+                    <strong>Context:</strong> We have launched the new UI to a small group of beta testers. We need to collect their feedback before a wider rollout.<br>
+                    <strong>Action:</strong> Can you create a Google form with questions about their experience and send it to the beta group? This form should be ready by end of day today.
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">
+            <span class="section-number">Rule 02</span> Respectful
+        </h2>
+        <div class="principle-grid">
+            <div class="principle-card">
+                <div class="p-icon">🔒</div>
+                <h3>সতর্ক থাকুন</h3>
+                <p>কী শেয়ার করা হচ্ছে, কখন এবং কার সাথে করা হচ্ছে সে সম্পর্কে অত্যন্ত সতর্ক থাকতে হবে।</p>
+            </div>
+            <div class="principle-card">
+                <div class="p-icon">💪</div>
+                <h3>শক্তির দিকে মনোযোগ</h3>
+                <p>কথা বলার সময় অন্যের দুর্বলতার দিকে নজর না দিয়ে শক্তির দিকে মনোযোগ দেওয়া।</p>
+            </div>
+            <div class="principle-card">
+                <div class="p-icon">🏆</div>
+                <h3>প্রশংসা করুন</h3>
+                <p>যদি সম্মানিত হতে চাই তবে অন্যদের প্রশংসা করতে হবে।</p>
+            </div>
+            <div class="principle-card">
+                <div class="p-icon">🤫</div>
+                <h3>জাহির করবেন না</h3>
+                <p>জাহির (flex) করা যাবে না। অন্যরা তাহলে মানসিক চাপ অনুভব করবে।</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">
+            <span class="section-number">Rule 03</span> Helpful
+        </h2>
+        <div class="principle-grid">
+            <div class="principle-card">
+                <div class="p-icon">🫂</div>
+                <h3>সবাইকে সাহায্য করুন</h3>
+                <p>সক্রিয়ভাবে সহকর্মীদের পাশে দাঁড়ান এবং প্রয়োজনীয় সহায়তা প্রদান করুন।</p>
+            </div>
+            <div class="principle-card">
+                <div class="p-icon">🌱</div>
+                <h3>উৎসাহিত করুন, নিরুৎসাহিত করবেন না</h3>
+                <p>নিজের বর্তমান দক্ষতা দেখাতে গিয়ে অন্যকে নিরুৎসাহিত করবেন না। বরং তাদের উন্নতিতে সহায়তা করুন।</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">
+            <span class="section-number">Rule 04</span> Active
+        </h2>
+        <div class="principle-grid">
+            <div class="principle-card">
+                <div class="p-icon">⏰</div>
+                <h3>Fixed Hours-এ সক্রিয় থাকুন</h3>
+                <p>নির্দিষ্ট সময়ে সক্রিয়ভাবে উপস্থিত থেকে কাজ করুন এবং নির্ভরযোগ্যতা বজায় রাখুন।</p>
+            </div>
+            <div class="principle-card">
+                <div class="p-icon">📢</div>
+                <h3>উপস্থিতি জানিয়ে দিন</h3>
+                <p>আপনি কখন সক্রিয় থাকবেন তা দলের সদস্যদের জানিয়ে দিন। আপনার অনুপস্থিতি বা পরিবর্তন সম্পর্কে আগাম তথ্য দিন।</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <strong>Built for professional communication excellence</strong><br>
+        <span>Communication Rules Handbook · Internal Use · v1.0</span>
+    </footer>
+
+    <script>
+        (function() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+
+            function getCurrentTheme() { return html.getAttribute('data-theme') || 'light'; }
+            function setTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+                try { localStorage.setItem('comm-rules-theme', theme); } catch (e) {}
+            }
+            const saved = (() => { try { return localStorage.getItem('comm-rules-theme'); } catch (e) { return null; } })();
+            if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme:dark)').matches)) setTheme('dark');
+            else setTheme('light');
+            themeToggle.addEventListener('click', () => setTheme(getCurrentTheme() === 'dark' ? 'light' : 'dark'));
+
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const emailBody = btn.closest('.email-body');
+                    if (!emailBody) return;
+                    let text = '';
+                    const walker = document.createTreeWalker(emailBody, NodeFilter.SHOW_TEXT, null, false);
+                    while (walker.nextNode()) {
+                        const node = walker.currentNode;
+                        if (node.parentElement.closest('.copy-btn') || node.parentElement.closest('.email-actions')) continue;
+                        text += node.textContent;
+                    }
+                    text = text.trim();
+                    const showCopied = () => {
+                        const orig = btn.innerHTML;
+                        btn.innerHTML = '✅ Copied!';
+                        btn.classList.add('copied');
+                        setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1800);
+                    };
+                    if (navigator.clipboard?.writeText) {
+                        navigator.clipboard.writeText(text).then(showCopied).catch(() => fallbackCopy(text, showCopied));
+                    } else {
+                        fallbackCopy(text, showCopied);
+                    }
+                });
+            });
+
+            function fallbackCopy(text, cb) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (e) {}
+                document.body.removeChild(ta);
+                if (cb) cb();
+            }
+
+            console.log('%c📘 Communication Rules %cReady', 'font-weight:700;font-size:1.1rem;color:#2563eb;', 'color:#64748b;');
+        })();
+    </script>
+</body>
+</html>
